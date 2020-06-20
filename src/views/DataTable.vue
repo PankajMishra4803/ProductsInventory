@@ -1,20 +1,24 @@
 <!--Search function-->
+  
 <template>
-  <div >
-    <h1>Datatable</h1>
-    <p> {{SearchKey}}</p>
-
-     <ul>
-        <!-- Render a li element for every entry in the computed filteredArticles array. -->
-
-        <li :key="indx" v-for="(user,indx) in filteredArticles">
-            
-            <p><b>{{user}}</b></p>
-            <hr>
-        </li>
-    </ul>
-  </div>
+  <v-card>
+    <v-card-title>
+      <v-text-field
+        v-model="search"
+        label="Search"
+        single-line
+        hide-details
+      ></v-text-field>
+    </v-card-title>
+    <v-data-table
+      :headers="headers"
+      :items="UserList"
+      :search="search"
+    ></v-data-table>
+  </v-card>
 </template>
+
+
 
 <script>
 
@@ -23,11 +27,26 @@ import axios from "axios";
 export default {
   name: 'Datatable',
   props: ['SearchKey'],
-  data (){
-    return {
-      UserList:[]
-    }
-  },
+  data () {
+      return {
+        search: '',
+        headers: [
+          {
+            text: 'Product ID',
+            align: 'start',
+            filterable: false,
+            value: 'id',
+          },
+          { text: 'Product Name', value: 'productName' },
+          { text: 'Product Description', value: 'productDescription' },
+          { text: 'Manufacturer', value: 'manufacturer' },
+          { text: 'Price', value: 'price' },
+          { text: 'Quantity', value: 'qantity' },
+                   
+        ],
+        UserList:[]
+      }
+    },
   
   mounted: function(){
     axios.get("http://localhost:3000/products")
