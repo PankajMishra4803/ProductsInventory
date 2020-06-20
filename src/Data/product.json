@@ -1,0 +1,88 @@
+{
+    "users": [
+      {
+        "firstName": "panakj",
+        "lastName": "jha",
+        "email": "pankj@gmail.com",
+        "password": "78547858",
+        "mobileNumber": "7854785445",
+        "id": 4
+      },
+      {
+        "firstName": "Rakesh",
+        "lastName": "jha",
+        "email": "rakesh7@gmail.com",
+        "password": "78754785",
+        "mobileNumber": "7845784578",
+        "id": 5
+      },
+      {
+        "firstName": "Amber",
+        "lastName": "Kumar",
+        "email": "amber.kumar@gmail.com",
+        "password": "8785421",
+        "mobileNumber": "7854785478",
+        "id": 6
+      }
+    ],
+    "products": [
+      {
+        "productName": "Redmi Note7",
+        "productDescription": "Redmi Note7",
+        "manufacturer": "Redmi Note7",
+        "price": 4521,
+        "qantity": 12,
+        "id": 11
+      },
+      {
+        "productName": "Apple 11",
+        "productDescription": "Apple 11",
+        "manufacturer": "Apple 11",
+        "price": 8475,
+        "qantity": 12,
+        "id": 12
+      },
+      {
+        "productName": "Samsung A40",
+        "productDescription": "this product manufactured by apple in 2019",
+        "manufacturer": "samsung",
+        "price": 2200,
+        "qantity": 12,
+        "id": 13
+      },
+      {
+        "productName": "Nokia6 ",
+        "productDescription": "manufatured in 2018",
+        "manufacturer": "Nokia pvt ltd",
+        "price": 222,
+        "qantity": 15,
+        "id": 14
+      }
+    ],
+    "productsGraph": [
+      {
+        "productName": "Redmi Note7",
+        "productId": 11,
+        "noOfTimeSee": 4,
+        "id": 9
+      },
+      {
+        "productName": "Samsung A40",
+        "productId": 13,
+        "noOfTimeSee": 13,
+        "id": 10
+      },
+      {
+        "productName": "Apple 11",
+        "productId": 12,
+        "noOfTimeSee": 1,
+        "id": 11
+      },
+      {
+        "productName": "Nokia6 ",
+        "productId": 14,
+        "noOfTimeSee": 1,
+        "id": 12
+      }
+    ]
+  }
