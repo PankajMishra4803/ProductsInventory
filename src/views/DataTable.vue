@@ -1,15 +1,27 @@
 
 <template>
   <v-card>
-    <v-data-table :headers="headers" :items="filteredArticles" sort-by="calories" class="elevation-1">
-      <template v-slot:item.actions ="{ item }">
-          <v-btn class="mx-2" fab dark x-small :to="`/updateProduct/${item.id}`" color="purple">
-              <v-icon dark>mdi-pencil</v-icon>
-          </v-btn>
-          <v-btn class="mx-2" fab dark x-small color="pink">
-              <v-icon dark  @click="deleteItem(item)">mdi-delete</v-icon>
-         </v-btn>
-    </template>
+    <v-data-table :headers="headers" :items="filteredProducts" sort-by="calories" color="purple">
+      <template v-slot:item="row">
+          <tr>
+              <td>
+                <router-link :to="`/viewProduct/${row.item.id}`">{{row.item.id}}</router-link>
+              </td>
+              <td>{{row.item.productName}}</td>
+              <td>{{row.item.productDescription}}</td>
+              <td>{{row.item.manufacturer}}</td>
+              <td>{{row.item.price}}</td>
+              <td>{{row.item.quantity}}</td>
+              <td>
+                    <v-btn class="mx-2" fab dark x-small :to="`/updateProduct/${row.item.id}`" color="purple">
+                        <v-icon dark>mdi-pencil</v-icon>
+                    </v-btn>
+                    <v-btn class="mx-2" fab dark x-small color="pink">
+                        <v-icon dark  @click="deleteItem(item)">mdi-delete</v-icon>
+                  </v-btn>
+              </td>
+          </tr>
+      </template>
     </v-data-table>
   </v-card>
 </template>
@@ -17,9 +29,9 @@
 
 
 <script>
-
+ 
 import axios from "axios";
-
+ 
 export default {
   name: 'Datatable',
   props: ['SearchKey'],
@@ -38,53 +50,42 @@ export default {
           { text: 'Product Description', value: 'productDescription' },
           { text: 'Manufacturer', value: 'manufacturer' },
           { text: 'Price', value: 'price' },
-          { text: 'Quantity', value: 'qantity' },
+          { text: 'Quantity', value: 'quantity' },
           { text: 'Actions', value: 'actions', sortable: false },
                    
         ],
-        UserList:[]
+        productsList:[]
       }
     },
   
   mounted: function(){
     axios.get("http://localhost:3000/products")
     .then((data) =>{
-        console.log("Data:",data.data);
-        this.UserList=data.data;
-        console.log("UserList:",this.UserList);
-
+        this.productsList=data.data;
     })
   },
   computed: {
-    // A computed property that holds only those items that match the searchString.
-    filteredArticles: function () {
-        var user_array = this.UserList,
+    filteredProducts: function () {
+        let product_array = this.productsList,
             searchString = this.SearchKey;
-
         if(!searchString){
-            return user_array;
+            return product_array;
         }
-
         searchString = searchString.trim().toLowerCase();
-
-        user_array = user_array.filter(function(item){
+        product_array = product_array.filter(function(item){
             if(item.productName.toLowerCase().indexOf(searchString) !== -1
             || item.productDescription.toLowerCase().indexOf(searchString) !== -1
             || item.manufacturer.toLowerCase().indexOf(searchString) !== -1
             || item.price.toString().toLowerCase().indexOf(searchString) !== -1
-            || item.qantity.toString().toLowerCase().indexOf(searchString) !== -1){
+            || item.quantity.toString().toLowerCase().indexOf(searchString) !== -1){
                 return item;
             }
         })
-
-        // Return an array with the filtered data.
-        return user_array;
+        return product_array;
     }
 },
 methods:{
   deleteItem (item) {
-        //const index = this.desserts.indexOf(item)
-        console.log(item)
         confirm(`Are you sure you want to delete this item?', ${item.id}`)
       }
 }
