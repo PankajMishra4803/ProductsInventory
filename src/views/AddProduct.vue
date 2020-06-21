@@ -4,7 +4,7 @@
       <v-row align="center" justify="center">
         <v-col cols="12" sm="8" md="4">
           <v-card class="elevation-12">
-            <v-toolbar color="primary" dark flat class="text-xs-center">
+            <v-toolbar color="purple" dark flat class="text-xs-center">
               <v-toolbar-title class="justify-center" v-if="addProductFlag"
                 >Add Product</v-toolbar-title
               >
@@ -68,7 +68,8 @@
               <v-btn
                 @click="updateProduct"
                 v-if="updateProductFlag"
-                color="primary"
+                color="purple"
+                class="white--text"
                 type="submit"
                 :disabled="!formIsValid"
                 >Update Product</v-btn

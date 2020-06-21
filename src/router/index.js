@@ -1,11 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import DashBoard from '../views/DashBoard.vue'
-import Registration from '../views/Registration.vue'
-import Login from '../views/Login.vue'
-import AcountDetails from '../views/AcountDetails.vue'
-import AddProduct from '../views/AddProduct.vue'
-import ProductDetails from '../views/ProductDetails.vue'
+
 
 Vue.use(VueRouter)
 
@@ -18,32 +14,32 @@ Vue.use(VueRouter)
   {
     path: '/registration',
     name: 'Registration',
-    component: Registration
+    component: () => import('../views/Registration.vue' )
   },
   {
     path: '/login',
     name: 'Login',
-    component: Login
+    component: () => import('../views/Login.vue')
   },
   {
     path: '/viewAccount',
     name: 'AcountDetails',
-    component: AcountDetails
+    component: () => import('../views/AcountDetails.vue')
   },
   {
     path: '/addProduct',
     name: 'AddProduct',
-    component: AddProduct
+    component: () => import( '../views/AddProduct.vue')
   },
   {
     path: '/viewProduct/:id',
     name: 'ProductDetails',
-    component: ProductDetails
+    component: () => import('../views/ProductDetails.vue')
   },
   {
     path: '/updateProduct/:id',
     name: 'ProductUpdate',
-    component: AddProduct
+    component: () => import('../views/AddProduct.vue')
   }
 ]
 

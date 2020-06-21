@@ -1,20 +1,16 @@
-<!--Search function-->
-  
+
 <template>
   <v-card>
-    <v-card-title>
-      <v-text-field
-        v-model="search"
-        label="Search"
-        single-line
-        hide-details
-      ></v-text-field>
-    </v-card-title>
-    <v-data-table
-      :headers="headers"
-      :items="UserList"
-      :search="search"
-    ></v-data-table>
+    <v-data-table :headers="headers" :items="filteredArticles" sort-by="calories" class="elevation-1">
+      <template v-slot:item.actions ="{ item }">
+          <v-btn class="mx-2" fab dark x-small :to="`/updateProduct/${item.id}`" color="purple">
+              <v-icon dark>mdi-pencil</v-icon>
+          </v-btn>
+          <v-btn class="mx-2" fab dark x-small color="pink">
+              <v-icon dark  @click="deleteItem(item)">mdi-delete</v-icon>
+         </v-btn>
+    </template>
+    </v-data-table>
   </v-card>
 </template>
 
@@ -30,6 +26,7 @@ export default {
   data () {
       return {
         search: '',
+        props:['SearchKey'],
         headers: [
           {
             text: 'Product ID',
@@ -42,6 +39,7 @@ export default {
           { text: 'Manufacturer', value: 'manufacturer' },
           { text: 'Price', value: 'price' },
           { text: 'Quantity', value: 'qantity' },
+          { text: 'Actions', value: 'actions', sortable: false },
                    
         ],
         UserList:[]
@@ -82,6 +80,13 @@ export default {
         // Return an array with the filtered data.
         return user_array;
     }
+},
+methods:{
+  deleteItem (item) {
+        //const index = this.desserts.indexOf(item)
+        console.log(item)
+        confirm(`Are you sure you want to delete this item?', ${item.id}`)
+      }
 }
 }
 </script>

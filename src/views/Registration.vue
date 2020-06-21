@@ -51,9 +51,8 @@
                   </v-text-field>
                 </v-form>
               </v-card-text>
-              <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn color="primary" :disabled="!isValid" @click="addUser">Login</v-btn>
+              <v-card-actions  class="justify-center">
+                <v-btn color="purple" class="white--text" :disabled="!isValid" @click="addUser">Register</v-btn>
               </v-card-actions>
             </v-card>
           </v-col>
