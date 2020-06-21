@@ -1,5 +1,14 @@
 <template>
   <div>
+     <v-btn small dark color="purple" to="/" class="float-left" style="margin: 12px;" v-if="addProductFlag">
+          Back
+      </v-btn>
+      <v-btn small dark color="purple" to="/" class="float-left" style="margin: 12px;" v-if="updateProductFlag">
+          Back
+      </v-btn>
+      <v-btn small dark color="purple" to="/" class="float-left" style="margin: 12px;" v-if="viewProductFlag">
+          Back
+      </v-btn>
     <v-container class="fill-height" fluid>
       <v-row align="center" justify="center">
         <v-col cols="12" sm="8" md="4">
@@ -46,9 +55,9 @@
                   required
                 ></v-text-field>
                 <v-text-field
-                  v-model="product.quantity"
+                  v-model="product.qantity"
                   label="Quantity"
-                  name="quantity"
+                  name="qantity"
                   type="number"
                   required
                 ></v-text-field>
@@ -59,8 +68,8 @@
               <v-btn
                 @click="addProduct"
                 v-if="addProductFlag"
-                color="primary"
-                type="submit"
+                color="purple"
+                class="white--text"
                 :disabled="!formIsValid"
                 >Add Product</v-btn
               >
