@@ -1,30 +1,24 @@
 <template>
   <div>
-     <v-btn small dark color="purple" to="/" class="float-left" style="margin: 12px;" v-if="addProductFlag">
-          Back
-      </v-btn>
-      <v-btn small dark color="purple" to="/" class="float-left" style="margin: 12px;" v-if="updateProductFlag">
-          Back
-      </v-btn>
-      <v-btn small dark color="purple" to="/" class="float-left" style="margin: 12px;" v-if="viewProductFlag">
-          Back
-      </v-btn>
     <v-container class="fill-height" fluid>
       <v-row align="center" justify="center">
         <v-col cols="12" sm="8" md="4">
+          <v-alert type="success" v-if="success">
+            {{success}}
+          </v-alert>
+          <v-alert type="error" v-if="error">
+            {{error}}
+          </v-alert>
           <v-card class="elevation-12">
-            <v-toolbar color="purple" dark flat class="text-xs-center">
+            <v-toolbar  color="purple" dark flat class="text-xs-center">
               <v-toolbar-title class="justify-center" v-if="addProductFlag"
                 >Add Product</v-toolbar-title
               >
               <v-toolbar-title v-if="updateProductFlag"
                 >Update Product</v-toolbar-title
               >
-              <v-toolbar-title v-if="viewProductFlag"
-                >View Product</v-toolbar-title
-              >
             </v-toolbar>
-            <v-card-text>
+            <v-card-text  >
               <v-form>
                 <v-text-field
                   v-model="product.productName"
@@ -52,35 +46,45 @@
                   label="Price"
                   name="price"
                   type="number"
+                  :rules="numberRules"
                   required
                 ></v-text-field>
                 <v-text-field
-                  v-model="product.qantity"
+                  v-model="product.quantity"
                   label="Quantity"
-                  name="qantity"
+                  name="quantity"
                   type="number"
+                  :rules="numberRules"
                   required
                 ></v-text-field>
               </v-form>
             </v-card-text>
 
-            <v-card-actions class="justify-center">
+            <v-card-actions >
+              <v-btn
+                @click="$router.push('/')"
+                color="purple"
+                class="ml-4 white--text"
+                >Back to DashBoard</v-btn
+              >
+              <v-spacer></v-spacer>
               <v-btn
                 @click="addProduct"
                 v-if="addProductFlag"
-                color="purple"
-                class="white--text"
+                type="submit"
                 :disabled="!formIsValid"
+                color="purple"
+                class="mr-5 white--text"
                 >Add Product</v-btn
               >
 
               <v-btn
                 @click="updateProduct"
                 v-if="updateProductFlag"
-                color="purple"
-                class="white--text"
                 type="submit"
+                color="purple"
                 :disabled="!formIsValid"
+                class="mr-5 white--text"
                 >Update Product</v-btn
               >
             </v-card-actions>
@@ -95,7 +99,6 @@
 import axios from "axios";
 export default {
   name: "AddProduct",
-
   data() {
     return {
       product: {
@@ -108,6 +111,10 @@ export default {
       viewProductFlag: false,
       updateProductFlag: false,
       addProductFlag: false,
+        numberRules: [
+        v => v.length > 0 || "This field may not be empty",
+        v => v > 0 || "The value must be greater than zero"
+      ]
     };
   },
 
@@ -117,10 +124,8 @@ export default {
     const currentRoute = this.$router.currentRoute.fullPath.split("/")[1];
     if (currentRoute == "addProduct") {
       this.addProductFlag = true;
-    } else if (currentRoute == "viewProduct") {
-      this.viewProductFlag = true;
-      this.getProduct(productId);
-    } else if (currentRoute == "updateProduct") {
+    }
+    else if (currentRoute == "updateProduct") {
       this.updateProductFlag = true;
       this.getProduct(productId);
     } else {
@@ -138,6 +143,12 @@ export default {
         this.product.quantity !== ""
       );
     },
+    error () {
+          return this.$store.getters.error
+        },
+    success () {
+        return this.$store.getters.success
+       }
   },
 
   methods: {
@@ -146,13 +157,14 @@ export default {
         return;
       }
       this.$store.dispatch("addNewProduct", this.product);
+      this.emptyProduct()
+      setTimeout( () => this.$router.push({ path: '/'}), 5000);
     },
-
     getAllProducts() {
       axios
         .get(`http://localhost:3000/products`)
         .then((data) => {
-          this.$store.dispatch("addAllProducts", data);
+          this.$store.dispatch("addAllProducts", data.data);
         });
     },
 
@@ -171,7 +183,15 @@ export default {
         this.product,
         this.$route.params.id,
       ]);
+      this.emptyProduct()
     },
-  },
+    emptyProduct(){
+      this.product.productName = ""
+        this.product.productDescription = "" 
+        this.product.manufacturer = ""
+        this.product.price = ""
+        this.product.quantity = ""
+    }
+  }
 };
 </script>
