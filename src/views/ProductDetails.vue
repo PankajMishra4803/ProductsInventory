@@ -73,7 +73,6 @@ export default {
         .get(`http://localhost:3000/products/${productId}`)
         .then((data) => {
           this.product = data.data;
-          console.log(this.product)
         })
         .catch((error)=>{
           this.error =  error

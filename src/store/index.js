@@ -7,7 +7,8 @@ export default new Vuex.Store({
   state: {
     products: [],
     success: null,
-    error: null
+    error: null,
+    userInfo:{}
   },
   mutations: {
     setAllProducts(state,payload){
@@ -22,6 +23,12 @@ export default new Vuex.Store({
     setSuccess (state , payload) {
       state.success = payload
     }, 
+    updateLoggedUser(state , payload){
+      console.log('state',state);
+      console.log('payload',payload);
+      state.userInfo = payload;
+      localStorage.setItem('userLoggged', JSON.stringify(state.userInfo))
+    },
     setError (state, payload) {
       state.error = payload
     },
@@ -58,6 +65,10 @@ export default new Vuex.Store({
         commit('setError', error )
       }
       )
+    },
+    userLoggedIn({commit}, payload){
+         console.log(payload)
+         commit('updateLoggedUser', payload)
     },
     updateProduct({commit}, payload)
     {

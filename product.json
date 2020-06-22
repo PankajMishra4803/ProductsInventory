@@ -1,0 +1,99 @@
+{
+  "users": [
+    {
+      "fname": "Pankaj",
+      "lname": "Jha",
+      "mail": "pankajk.mishra4803@gmail.com",
+      "pwd": "Pankaj@1991",
+      "id": 1
+    },
+    {
+      "fname": "Pankaj",
+      "lname": "Mishra",
+      "mail": "pankaj.mishra@gmail.com",
+      "pwd": "Pankaj@1991",
+      "id": 2
+    },
+    {
+      "fname": "Deepraj",
+      "lname": "Jha",
+      "mail": "deepraj@gamil.com",
+      "pwd": "Deepraj@1991",
+      "id": 3
+    }
+  ],
+  "products": [
+    {
+      "productName": "Samsung",
+      "productDescription": "Good Product",
+      "manufacturer": "Samsung ltd",
+      "price": "25500 Rs",
+      "quantity": "12",
+      "id": 1
+    },
+    {
+      "productName": "Apple",
+      "productDescription": "This is good product",
+      "manufacturer": "Apple ltd",
+      "price": "78545 Rs",
+      "quantity": "5",
+      "id": 2
+    },
+    {
+      "productName": "Motorla",
+      "productDescription": "This is good product",
+      "manufacturer": "Motorla",
+      "price": "15822 Rs",
+      "quantity": "2",
+      "id": 3
+    },
+    {
+      "productName": "Samsung Guru",
+      "productDescription": "small device",
+      "manufacturer": "Samsung",
+      "price": "1500 Rs",
+      "quantity": "5",
+      "id": 4
+    },
+    {
+      "productName": "Samsung A30",
+      "productDescription": "Good Product",
+      "manufacturer": "Samsung",
+      "price": "15000 Rs",
+      "quantity": "8",
+      "id": 5
+    }
+  ],
+  "productsGraph": [
+    {
+      "productId": 1,
+      "productName": "Redmi 8",
+      "nonOfview": 6,
+      "id": 1
+    },
+    {
+      "productId": 2,
+      "productName": "Apple",
+      "nonOfview": 6,
+      "id": 2
+    },
+    {
+      "productId": 3,
+      "productName": "Motorla",
+      "nonOfview": 4,
+      "id": 3
+    },
+    {
+      "productId": 4,
+      "productName": "Samsung Guru",
+      "nonOfview": 2,
+      "id": 4
+    },
+    {
+      "productId": 5,
+      "productName": "Samsung A30",
+      "nonOfview": 3,
+      "id": 5
+    }
+  ]
+}

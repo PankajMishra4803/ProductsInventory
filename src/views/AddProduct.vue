@@ -19,12 +19,13 @@
               >
             </v-toolbar>
             <v-card-text  >
-              <v-form>
+              <v-form  ref="form">
                 <v-text-field
                   v-model="product.productName"
                   label="ProductName"
                   name="productName"
                   type="text"
+                  color="purple"
                   required
                 ></v-text-field>
                 <v-text-field
@@ -32,12 +33,14 @@
                   label="ProductDescription"
                   name="ProductDescription"
                   type="text"
+                  color="purple"
                   required
                 ></v-text-field>
                 <v-text-field
                   v-model="product.manufacturer"
                   label="Manufacturer"
                   name="manufacturer"
+                  color="purple"
                   type="text"
                   required
                 ></v-text-field>
@@ -45,16 +48,17 @@
                   v-model="product.price"
                   label="Price"
                   name="price"
-                  type="number"
-                  :rules="numberRules"
+                  color="purple"
+                  type="text"
+                  v-on:blur="formatPrice(product.price)"
                   required
                 ></v-text-field>
                 <v-text-field
                   v-model="product.quantity"
                   label="Quantity"
                   name="quantity"
-                  type="number"
-                  :rules="numberRules"
+                  color="purple"
+                  type="text"
                   required
                 ></v-text-field>
               </v-form>
@@ -111,10 +115,6 @@ export default {
       viewProductFlag: false,
       updateProductFlag: false,
       addProductFlag: false,
-        numberRules: [
-        v => v.length > 0 || "This field may not be empty",
-        v => v > 0 || "The value must be greater than zero"
-      ]
     };
   },
 
@@ -157,8 +157,8 @@ export default {
         return;
       }
       this.$store.dispatch("addNewProduct", this.product);
-      this.emptyProduct()
-      setTimeout( () => this.$router.push({ path: '/'}), 5000);
+      this.$refs.form.reset();
+      setTimeout( () => this.$router.push({ path: '/'}), 3000);
     },
     getAllProducts() {
       axios
@@ -167,7 +167,10 @@ export default {
           this.$store.dispatch("addAllProducts", data.data);
         });
     },
-
+     formatPrice(value) {
+        let val = value
+        this.product.price =  `${val} Rs`;
+    },
     getProduct(id) {
       axios
         .get(`http://localhost:3000/products/${id}`)
@@ -183,14 +186,8 @@ export default {
         this.product,
         this.$route.params.id,
       ]);
-      this.emptyProduct()
-    },
-    emptyProduct(){
-      this.product.productName = ""
-        this.product.productDescription = "" 
-        this.product.manufacturer = ""
-        this.product.price = ""
-        this.product.quantity = ""
+       this.$refs.form.reset();
+      setTimeout( () => this.$router.push({ path: '/'}), 3000);
     }
   }
 };
