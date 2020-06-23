@@ -44,7 +44,10 @@ export default new Vuex.Store({
         product.quantity = payload[0].quantity
         }
       }
-    }
+    },
+    clearSuccess(state) {
+      state.success = null
+  }
   },
   actions: {
     addNewProduct({ commit }, payload) {
@@ -89,7 +92,10 @@ export default new Vuex.Store({
     addAllProducts( {commit }, payload)
     {
       commit('setAllProducts',payload)
-    }
+    },
+    clearSuccess  ( {commit}) {
+      commit('clearSuccess')
+  }
   },
   getters:{
     success (state) {
